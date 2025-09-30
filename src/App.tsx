@@ -13,132 +13,141 @@ import {
   HelpCircle,
   CheckCircle,
   Zap,
-  ChevronRight
+  ChevronRight,
+  Shield
 } from 'lucide-react';
 
 function App() {
   const features = [
     {
-      category: "Smart Learning Tools",
+      category: "Cut Through the Jargon",
       icon: <Brain className="w-8 h-8" />,
+      description: "We translate complex financial terms into plain English, so you can focus on learning instead of decoding.",
       items: [
         {
-          title: "Jargon Translator",
-          description: "Break down complex financial terms into simple language with our comprehensive word bank",
+          title: "Plain English Word Bank",
+          description: "Every confusing term explained in simple language. No more feeling lost when reading about investing.",
           icon: <BookOpen className="w-6 h-6" />
         },
         {
-          title: "AI Investment Chatbot",
-          description: "Explain what you're thinking and get matched to the right terms with deeper explanations",
+          title: "Smart Term Matcher",
+          description: "Describe what you're thinking about in your own words, and we'll help you find the right investing concept with a clear explanation.",
           icon: <MessageCircle className="w-6 h-6" />
         }
       ]
     },
     {
-      category: "Anxiety-Free Investing",
+      category: "Emotional Support & Confidence",
       icon: <Heart className="w-8 h-8" />,
+      description: "We address your worries head-on and help you build the confidence to invest at your own pace.",
       items: [
         {
-          title: "Common Concerns Addressed",
-          description: "Get reassurance about typical investor worries and learn why they're normal",
+          title: "Your Worries Are Normal",
+          description: "Get reassurance about common investor concerns. You're not alone in feeling uncertain—we're here to help.",
           icon: <HelpCircle className="w-6 h-6" />
         },
         {
-          title: "Small Budget Solutions",
-          description: "Start with just $5 - learn that every amount counts and builds good habits",
+          title: "Start Small, Think Big",
+          description: "Begin with just $5. Every dollar counts, and small investments build powerful habits over time.",
           icon: <DollarSign className="w-6 h-6" />
         },
         {
-          title: "Market Volatility Education",
-          description: "Understand that stock fluctuations are normal and part of long-term growth",
+          title: "When Stocks Go Down",
+          description: "Learn why market ups and downs are completely normal and how they fit into your long-term success.",
           icon: <TrendingUp className="w-6 h-6" />
         }
       ]
     },
     {
-      category: "Gamified Missions",
+      category: "Learn by Doing",
       icon: <Target className="w-8 h-8" />,
+      description: "Build confidence through hands-on missions that make learning feel like progress, not homework.",
       items: [
         {
-          title: "Weekly Challenges",
-          description: "Complete investing actions like making your first stock purchase",
+          title: "Your First Investment",
+          description: "Take the leap with guided support. We'll walk you through making your first stock purchase step by step.",
           icon: <Award className="w-6 h-6" />
         },
         {
-          title: "Educational Quests",
-          description: "Read articles, take quizzes, and test your knowledge on market fundamentals",
+          title: "Knowledge That Sticks",
+          description: "Read beginner-friendly articles and test your understanding with quizzes that actually make sense.",
           icon: <CheckCircle className="w-6 h-6" />
         },
         {
-          title: "Social Engagement",
-          description: "Comment on posts, share your accomplishments, and learn from others",
+          title: "Learn Together",
+          description: "Share your wins, ask questions, and learn from others who started exactly where you are now.",
           icon: <Users className="w-6 h-6" />
         }
       ]
     },
     {
-      category: "Personalized Strategy",
+      category: "Your Personal Investment Plan",
       icon: <BarChart3 className="w-8 h-8" />,
+      description: "We help you create a plan that fits your life, your values, and your timeline—no cookie-cutter advice.",
       items: [
         {
-          title: "Investment Compatibility Score",
-          description: "Take a questionnaire about your goals, timeline, and values to get personalized recommendations",
+          title: "What Fits Your Life",
+          description: "Answer simple questions about your goals and values to discover investment approaches that feel right for you.",
           icon: <Zap className="w-6 h-6" />
         },
         {
-          title: "Goal-Based Planning",
-          description: "Set 5-year and 10-year targets with monthly investment capacity assessment",
+          title: "Your Timeline, Your Goals",
+          description: "Whether you're planning for 5 years or 15, we'll help you set realistic targets based on what you can actually invest.",
           icon: <Target className="w-6 h-6" />
         },
         {
-          title: "ESG Alignment",
-          description: "Match investments with causes you support and avoid those you don't",
+          title: "Invest in What Matters",
+          description: "Support companies that align with your values and avoid those that don't. Your money, your choice.",
           icon: <Heart className="w-6 h-6" />
         },
         {
-          title: "Portfolio Visualization",
-          description: "See simulated growth projections and understand potential outcomes",
+          title: "See Your Future",
+          description: "Visualize how your investments might grow over time with easy-to-understand projections.",
           icon: <BarChart3 className="w-6 h-6" />
         }
       ]
     },
     {
-      category: "Social Learning Hub",
+      category: "Safe Community Learning",
       icon: <Users className="w-8 h-8" />,
+      description: "Connect with other beginners in a supportive, public environment where everyone's learning together.",
       items: [
         {
-          title: "Public Achievement Feed",
-          description: "Share your investing milestones and celebrate others' successes",
+          title: "Celebrate Your Wins",
+          description: "Share your investing milestones and cheer on others. Every step forward deserves recognition.",
           icon: <Award className="w-6 h-6" />
         },
         {
-          title: "Q&A Community",
-          description: "Ask questions, get answers, and learn from experienced investors",
+          title: "No Question Too Small",
+          description: "Ask anything—from 'What's a stock?' to complex strategy questions. Our community is here to help.",
           icon: <MessageCircle className="w-6 h-6" />
         },
         {
-          title: "Safe Environment",
-          description: "All interactions are public and moderated - no private messaging for security",
-          icon: <CheckCircle className="w-6 h-6" />
+          title: "Safe & Supportive",
+          description: "All conversations are public and moderated. No private messaging means no pressure, just genuine help.",
+          icon: <Shield className="w-6 h-6" />
         }
       ]
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-brand-cream to-white">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-slate-200">
+      <header className="bg-white shadow-sm border-b border-brand-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-2xl mb-4">
-              <TrendingUp className="w-8 h-8 text-blue-600" />
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-blue/10 rounded-2xl mb-4">
+              <TrendingUp className="w-8 h-8 text-brand-blue" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-              Investing Simplified
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Stocks, Explained in Plain English
             </h1>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              A social learning platform that makes investing accessible, anxiety-free, and engaging for everyone
+            <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed mb-6">
+              We make the stock market beginner-friendly by stripping away confusing jargon and providing emotional support for new investors.
+            </p>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Instead of telling you what to buy, we teach you how to think—so you can approach investing with clarity, calm, and confidence, no matter your age or background.
             </p>
           </div>
         </div>
@@ -151,12 +160,15 @@ function App() {
             <section key={categoryIndex} className="relative">
               {/* Category Header */}
               <div className="text-center mb-16">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-2xl mb-6 text-blue-600">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-green/10 rounded-2xl mb-6 text-brand-green">
                   {category.icon}
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                   {category.category}
                 </h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                  {category.description}
+                </p>
               </div>
 
               {/* Feature Cards */}
@@ -164,23 +176,23 @@ function App() {
                 {category.items.map((item, itemIndex) => (
                   <div
                     key={itemIndex}
-                    className="group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-blue-200"
+                    className="group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-brand-blue/30"
                   >
                     <div className="flex items-center mb-6">
-                      <div className="flex items-center justify-center w-12 h-12 bg-blue-50 rounded-xl text-blue-600 group-hover:bg-blue-100 transition-colors duration-300">
+                      <div className="flex items-center justify-center w-12 h-12 bg-brand-yellow/20 rounded-xl text-brand-blue group-hover:bg-brand-yellow/30 transition-colors duration-300">
                         {item.icon}
                       </div>
                     </div>
                     
-                    <h3 className="text-xl font-semibold text-slate-900 mb-3">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3">
                       {item.title}
                     </h3>
                     
-                    <p className="text-slate-600 leading-relaxed mb-6">
+                    <p className="text-gray-600 leading-relaxed mb-6">
                       {item.description}
                     </p>
 
-                    <div className="flex items-center text-blue-600 font-medium group-hover:text-blue-700 transition-colors duration-300">
+                    <div className="flex items-center text-brand-blue font-medium group-hover:text-brand-green transition-colors duration-300">
                       <span>Learn more</span>
                       <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
                     </div>
@@ -193,20 +205,20 @@ function App() {
 
         {/* Call to Action */}
         <section className="mt-24 text-center">
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-12 text-white">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Start Your Investment Journey?
+          <div className="bg-gradient-to-r from-brand-blue to-brand-green rounded-3xl p-12 text-white">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Ready to Turn Investing from Overwhelming into Empowering?
             </h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Join thousands of learners who are building wealth confidently with our supportive community
+            <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
+              Join beginners of every age who are learning to invest with clarity, calm, and confidence in our supportive community.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl hover:bg-blue-50 transition-colors duration-300">
-                Get Started Free
+              <button className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-blue font-semibold rounded-xl hover:bg-brand-cream transition-colors duration-300">
+                Start Learning Today
                 <ChevronRight className="w-5 h-5 ml-2" />
               </button>
-              <button className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-blue-600 transition-colors duration-300">
-                Watch Demo
+              <button className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-brand-blue transition-colors duration-300">
+                See How It Works
               </button>
             </div>
           </div>
@@ -214,13 +226,16 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-slate-300 py-12">
+      <footer className="bg-gray-900 text-gray-300 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-slate-800 rounded-xl mb-4">
-            <TrendingUp className="w-6 h-6 text-blue-400" />
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-800 rounded-xl mb-4">
+            <TrendingUp className="w-6 h-6 text-brand-yellow" />
           </div>
-          <p className="text-lg">
-            Making investing accessible to everyone, one feature at a time.
+          <p className="text-lg mb-2">
+            Creating opportunities for beginners of every age.
+          </p>
+          <p className="text-sm text-gray-400">
+            Clarity • Accessibility • Empowerment • Confidence
           </p>
         </div>
       </footer>
