@@ -189,10 +189,20 @@ function AppContent() {
           {/* Navigation */}
           <div className="flex justify-between items-center mb-8">
             <div className="flex items-center">
-              <div className="inline-flex items-center justify-center w-10 h-10 bg-brand-blue/10 rounded-xl mr-3">
-                <TrendingUp className="w-6 h-6 text-brand-blue" />
+              <img 
+                src="https://i.imgur.com/YourLogoUrl.png" 
+                alt="First Shares Logo" 
+                className="h-10 w-auto mr-3"
+                onError={(e) => {
+                  // Fallback to icon if image fails to load
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                }}
+              />
+              <div className="hidden inline-flex items-center justify-center w-10 h-10 bg-gradient-to-br from-brand-yellow to-brand-blue rounded-xl mr-3">
+                <TrendingUp className="w-6 h-6 text-white" />
               </div>
-              <span className="text-xl font-semibold text-gray-900">StockSense</span>
+              <span className="text-xl font-bold text-gray-900">First Shares</span>
             </div>
             
             <div className="flex items-center space-x-4">
@@ -233,8 +243,8 @@ function AppContent() {
 
           {/* Hero Content */}
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-blue/10 rounded-2xl mb-4">
-              <TrendingUp className="w-8 h-8 text-brand-blue" />
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-brand-yellow via-brand-blue to-brand-green rounded-3xl mb-6 shadow-lg">
+              <TrendingUp className="w-10 h-10 text-white" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Stocks, Explained in Plain English
@@ -247,13 +257,13 @@ function AppContent() {
             </p>
             
             {!user && (
-              <div className="bg-brand-yellow/20 border border-brand-yellow/30 rounded-2xl p-6 max-w-2xl mx-auto">
-                <p className="text-brand-blue font-medium mb-4">
+              <div className="bg-gradient-to-r from-brand-yellow/20 to-brand-cream/50 border border-brand-yellow/40 rounded-2xl p-6 max-w-2xl mx-auto shadow-sm">
+                <p className="text-brand-blue font-semibold mb-4">
                   🌟 Get started with a free account to unlock personalized learning and community features!
                 </p>
                 <p className="text-sm text-gray-600">
-                  <span className="font-medium text-brand-green">Free access:</span> All emotional support and anxiety help • 
-                  <span className="font-medium text-brand-blue ml-2">Premium:</span> Investment planning, community, and guided lessons
+                  <span className="font-semibold text-brand-green bg-brand-green/10 px-2 py-1 rounded">Free access:</span> All emotional support and anxiety help • 
+                  <span className="font-semibold text-brand-blue bg-brand-blue/10 px-2 py-1 rounded ml-2">Premium:</span> Investment planning, community, and guided lessons
                 </p>
               </div>
             )}
@@ -270,8 +280,8 @@ function AppContent() {
               <div className="text-center mb-16">
                 <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 ${
                   category.requiresAuth && !user
-                    ? 'bg-gray-100 text-gray-400'
-                    : 'bg-brand-green/10 text-brand-green'
+                    ? 'bg-gray-100 text-gray-400 shadow-sm'
+                    : 'bg-gradient-to-br from-brand-green/20 to-brand-blue/20 text-brand-green shadow-lg'
                 }`}>
                   {category.icon}
                 </div>
@@ -282,12 +292,12 @@ function AppContent() {
                     {category.category}
                   </h2>
                   {category.requiresAuth && !user && (
-                    <div className="ml-4 bg-brand-yellow/20 text-brand-blue px-3 py-1 rounded-lg text-sm font-medium">
+                    <div className="ml-4 bg-gradient-to-r from-brand-yellow/30 to-brand-yellow/20 text-brand-blue px-4 py-2 rounded-full text-sm font-semibold shadow-sm border border-brand-yellow/30">
                       Premium Feature
                     </div>
                   )}
                   {!category.requiresAuth && (
-                    <div className="ml-4 bg-brand-green/20 text-brand-green px-3 py-1 rounded-lg text-sm font-medium">
+                    <div className="ml-4 bg-gradient-to-r from-brand-green/30 to-brand-green/20 text-brand-green px-4 py-2 rounded-full text-sm font-semibold shadow-sm border border-brand-green/30">
                       Always Free
                     </div>
                   )}
@@ -318,7 +328,9 @@ function AppContent() {
 
         {/* Call to Action */}
         <section className="mt-24 text-center">
-          <div className="bg-gradient-to-r from-brand-blue to-brand-green rounded-3xl p-12 text-white">
+          <div className="bg-gradient-to-br from-brand-blue via-brand-green to-brand-yellow rounded-3xl p-12 text-white shadow-2xl relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-blue/90 to-brand-green/90"></div>
+            <div className="relative z-10">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Ready to Turn Investing from Overwhelming into Empowering?
             </h2>
@@ -335,7 +347,7 @@ function AppContent() {
                 <>
                   <button 
                     onClick={handleSignUp}
-                    className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-blue font-semibold rounded-xl hover:bg-brand-cream transition-colors duration-300"
+                    className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-blue font-semibold rounded-xl hover:bg-brand-cream transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                   >
                     Start Learning Today
                     <ChevronRight className="w-5 h-5 ml-2" />
@@ -346,12 +358,13 @@ function AppContent() {
                         behavior: 'smooth' 
                       });
                     }}
-                    className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-brand-blue transition-colors duration-300"
+                    className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-brand-blue transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                   >
                     Try Anxiety Help (Free)
                   </button>
                 </>
               )}
+            </div>
             </div>
           </div>
         </section>
@@ -360,9 +373,10 @@ function AppContent() {
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-300 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-800 rounded-xl mb-4">
-            <TrendingUp className="w-6 h-6 text-brand-yellow" />
+          <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-brand-yellow to-brand-green rounded-2xl mb-4 shadow-lg">
+            <TrendingUp className="w-7 h-7 text-white" />
           </div>
+          <h3 className="text-xl font-bold text-white mb-2">First Shares</h3>
           <p className="text-lg mb-2">
             Creating opportunities for beginners of every age.
           </p>

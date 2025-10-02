@@ -26,14 +26,14 @@ export function ProtectedFeature({
     <div
       className={`group relative bg-white rounded-2xl p-8 shadow-sm border border-gray-100 transition-all duration-300 ${
         isProtected 
-          ? 'hover:shadow-lg hover:border-brand-blue/30 cursor-pointer' 
-          : 'hover:shadow-xl hover:border-brand-blue/30'
+          ? 'hover:shadow-xl hover:border-brand-blue/40 cursor-pointer hover:-translate-y-1' 
+          : 'hover:shadow-xl hover:border-brand-green/40 hover:-translate-y-1'
       }`}
       onClick={handleClick}
     >
       {isProtected && (
         <div className="absolute top-4 right-4">
-          <div className="bg-brand-yellow/20 text-brand-blue p-2 rounded-lg">
+          <div className="bg-gradient-to-br from-brand-yellow/30 to-brand-yellow/20 text-brand-blue p-2 rounded-lg shadow-sm border border-brand-yellow/30">
             <Lock className="w-4 h-4" />
           </div>
         </div>
@@ -42,8 +42,8 @@ export function ProtectedFeature({
       <div className="flex items-center mb-6">
         <div className={`flex items-center justify-center w-12 h-12 rounded-xl transition-colors duration-300 ${
           isProtected 
-            ? 'bg-gray-100 text-gray-500 group-hover:bg-brand-yellow/20 group-hover:text-brand-blue'
-            : 'bg-brand-yellow/20 text-brand-blue group-hover:bg-brand-yellow/30'
+            ? 'bg-gray-100 text-gray-500 group-hover:bg-gradient-to-br group-hover:from-brand-yellow/30 group-hover:to-brand-blue/20 group-hover:text-brand-blue shadow-sm'
+            : 'bg-gradient-to-br from-brand-yellow/20 to-brand-green/20 text-brand-blue group-hover:from-brand-yellow/30 group-hover:to-brand-green/30 shadow-sm'
         }`}>
           {icon}
         </div>
@@ -63,8 +63,8 @@ export function ProtectedFeature({
 
       <div className={`flex items-center font-medium transition-colors duration-300 ${
         isProtected 
-          ? 'text-gray-400 group-hover:text-brand-blue'
-          : 'text-brand-blue group-hover:text-brand-green'
+          ? 'text-gray-400 group-hover:text-brand-blue group-hover:font-semibold'
+          : 'text-brand-blue group-hover:text-brand-green group-hover:font-semibold'
       }`}>
         <span>{isProtected ? 'Sign in to access' : 'Learn more'}</span>
         <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />

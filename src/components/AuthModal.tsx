@@ -53,7 +53,7 @@ export function AuthModal({ isOpen, onClose, initialMode = 'signin' }: AuthModal
         </button>
 
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-blue/10 rounded-2xl mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-brand-blue/20 to-brand-green/20 rounded-2xl mb-4 shadow-lg">
             <User className="w-8 h-8 text-brand-blue" />
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
@@ -117,7 +117,7 @@ export function AuthModal({ isOpen, onClose, initialMode = 'signin' }: AuthModal
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-brand-blue text-white py-3 px-4 rounded-xl font-semibold hover:bg-brand-blue/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+            className="w-full bg-gradient-to-r from-brand-blue to-brand-green text-white py-3 px-4 rounded-xl font-semibold hover:from-brand-blue/90 hover:to-brand-green/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
           >
             {loading ? (
               <Loader2 className="w-5 h-5 animate-spin" />
@@ -130,7 +130,7 @@ export function AuthModal({ isOpen, onClose, initialMode = 'signin' }: AuthModal
         <div className="text-center mt-6">
           <button
             onClick={() => setMode(mode === 'signin' ? 'signup' : 'signin')}
-            className="text-brand-blue hover:text-brand-blue/80 transition-colors font-medium"
+            className="text-brand-blue hover:text-brand-green transition-colors font-medium hover:font-semibold"
           >
             {mode === 'signin' 
               ? "Don't have an account? Sign up" 
