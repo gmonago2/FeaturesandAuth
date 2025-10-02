@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   MessageCircle, 
   BookOpen, 
@@ -14,25 +14,47 @@ import {
   CheckCircle,
   Zap,
   ChevronRight,
-  Shield
+  Shield,
+  LogOut,
+  User
 } from 'lucide-react';
+import { AuthProvider, useAuth } from './hooks/useAuth';
+import { AuthModal } from './components/AuthModal';
+import { ProtectedFeature } from './components/ProtectedFeature';
 
-function App() {
+function AppContent() {
+  const { user, signOut, loading } = useAuth();
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
+
+  const handleLoginRequired = () => {
+    setAuthMode('signin');
+    setAuthModalOpen(true);
+  };
+
+  const handleSignUp = () => {
+    setAuthMode('signup');
+    setAuthModalOpen(true);
+  };
+
   const features = [
     {
       category: "Cut Through the Jargon",
       icon: <Brain className="w-8 h-8" />,
       description: "We translate complex financial terms into plain English, so you can focus on learning instead of decoding.",
+      requiresAuth: true,
       items: [
         {
           title: "Plain English Word Bank",
           description: "Every confusing term explained in simple language. No more feeling lost when reading about investing.",
-          icon: <BookOpen className="w-6 h-6" />
+          icon: <BookOpen className="w-6 h-6" />,
+          requiresAuth: true
         },
         {
           title: "Smart Term Matcher",
           description: "Describe what you're thinking about in your own words, and we'll help you find the right investing concept with a clear explanation.",
-          icon: <MessageCircle className="w-6 h-6" />
+          icon: <MessageCircle className="w-6 h-6" />,
+          requiresAuth: true
         }
       ]
     },
@@ -40,21 +62,25 @@ function App() {
       category: "Emotional Support & Confidence",
       icon: <Heart className="w-8 h-8" />,
       description: "We address your worries head-on and help you build the confidence to invest at your own pace.",
+      requiresAuth: false,
       items: [
         {
           title: "Your Worries Are Normal",
           description: "Get reassurance about common investor concerns. You're not alone in feeling uncertain—we're here to help.",
-          icon: <HelpCircle className="w-6 h-6" />
+          icon: <HelpCircle className="w-6 h-6" />,
+          requiresAuth: false
         },
         {
           title: "Start Small, Think Big",
           description: "Begin with just $5. Every dollar counts, and small investments build powerful habits over time.",
-          icon: <DollarSign className="w-6 h-6" />
+          icon: <DollarSign className="w-6 h-6" />,
+          requiresAuth: false
         },
         {
           title: "When Stocks Go Down",
           description: "Learn why market ups and downs are completely normal and how they fit into your long-term success.",
-          icon: <TrendingUp className="w-6 h-6" />
+          icon: <TrendingUp className="w-6 h-6" />,
+          requiresAuth: false
         }
       ]
     },
@@ -62,21 +88,25 @@ function App() {
       category: "Learn by Doing",
       icon: <Target className="w-8 h-8" />,
       description: "Build confidence through hands-on missions that make learning feel like progress, not homework.",
+      requiresAuth: true,
       items: [
         {
           title: "Your First Investment",
           description: "Take the leap with guided support. We'll walk you through making your first stock purchase step by step.",
-          icon: <Award className="w-6 h-6" />
+          icon: <Award className="w-6 h-6" />,
+          requiresAuth: true
         },
         {
           title: "Knowledge That Sticks",
           description: "Read beginner-friendly articles and test your understanding with quizzes that actually make sense.",
-          icon: <CheckCircle className="w-6 h-6" />
+          icon: <CheckCircle className="w-6 h-6" />,
+          requiresAuth: true
         },
         {
           title: "Learn Together",
           description: "Share your wins, ask questions, and learn from others who started exactly where you are now.",
-          icon: <Users className="w-6 h-6" />
+          icon: <Users className="w-6 h-6" />,
+          requiresAuth: true
         }
       ]
     },
@@ -84,26 +114,31 @@ function App() {
       category: "Your Personal Investment Plan",
       icon: <BarChart3 className="w-8 h-8" />,
       description: "We help you create a plan that fits your life, your values, and your timeline—no cookie-cutter advice.",
+      requiresAuth: true,
       items: [
         {
           title: "What Fits Your Life",
           description: "Answer simple questions about your goals and values to discover investment approaches that feel right for you.",
-          icon: <Zap className="w-6 h-6" />
+          icon: <Zap className="w-6 h-6" />,
+          requiresAuth: true
         },
         {
           title: "Your Timeline, Your Goals",
           description: "Whether you're planning for 5 years or 15, we'll help you set realistic targets based on what you can actually invest.",
-          icon: <Target className="w-6 h-6" />
+          icon: <Target className="w-6 h-6" />,
+          requiresAuth: true
         },
         {
           title: "Invest in What Matters",
           description: "Support companies that align with your values and avoid those that don't. Your money, your choice.",
-          icon: <Heart className="w-6 h-6" />
+          icon: <Heart className="w-6 h-6" />,
+          requiresAuth: true
         },
         {
           title: "See Your Future",
           description: "Visualize how your investments might grow over time with easy-to-understand projections.",
-          icon: <BarChart3 className="w-6 h-6" />
+          icon: <BarChart3 className="w-6 h-6" />,
+          requiresAuth: true
         }
       ]
     },
@@ -111,31 +146,92 @@ function App() {
       category: "Safe Community Learning",
       icon: <Users className="w-8 h-8" />,
       description: "Connect with other beginners in a supportive, public environment where everyone's learning together.",
+      requiresAuth: true,
       items: [
         {
           title: "Celebrate Your Wins",
           description: "Share your investing milestones and cheer on others. Every step forward deserves recognition.",
-          icon: <Award className="w-6 h-6" />
+          icon: <Award className="w-6 h-6" />,
+          requiresAuth: true
         },
         {
           title: "No Question Too Small",
           description: "Ask anything—from 'What's a stock?' to complex strategy questions. Our community is here to help.",
-          icon: <MessageCircle className="w-6 h-6" />
+          icon: <MessageCircle className="w-6 h-6" />,
+          requiresAuth: true
         },
         {
           title: "Safe & Supportive",
           description: "All conversations are public and moderated. No private messaging means no pressure, just genuine help.",
-          icon: <Shield className="w-6 h-6" />
+          icon: <Shield className="w-6 h-6" />,
+          requiresAuth: true
         }
       ]
     }
   ];
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-brand-cream to-white flex items-center justify-center">
+        <div className="text-center">
+          <TrendingUp className="w-12 h-12 text-brand-blue animate-pulse mx-auto mb-4" />
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-brand-cream to-white">
       {/* Header */}
       <header className="bg-white shadow-sm border-b border-brand-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          {/* Navigation */}
+          <div className="flex justify-between items-center mb-8">
+            <div className="flex items-center">
+              <div className="inline-flex items-center justify-center w-10 h-10 bg-brand-blue/10 rounded-xl mr-3">
+                <TrendingUp className="w-6 h-6 text-brand-blue" />
+              </div>
+              <span className="text-xl font-semibold text-gray-900">StockSense</span>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              {user ? (
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-2 text-gray-700">
+                    <div className="w-8 h-8 bg-brand-blue/10 rounded-full flex items-center justify-center">
+                      <User className="w-4 h-4 text-brand-blue" />
+                    </div>
+                    <span className="text-sm font-medium">{user.email}</span>
+                  </div>
+                  <button
+                    onClick={signOut}
+                    className="flex items-center space-x-2 text-gray-600 hover:text-gray-800 transition-colors"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    <span className="text-sm">Sign Out</span>
+                  </button>
+                </div>
+              ) : (
+                <div className="flex items-center space-x-3">
+                  <button
+                    onClick={() => handleLoginRequired()}
+                    className="text-gray-600 hover:text-gray-800 font-medium transition-colors"
+                  >
+                    Sign In
+                  </button>
+                  <button
+                    onClick={handleSignUp}
+                    className="bg-brand-blue text-white px-4 py-2 rounded-lg font-medium hover:bg-brand-blue/90 transition-colors"
+                  >
+                    Get Started
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Hero Content */}
           <div className="text-center">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-blue/10 rounded-2xl mb-4">
               <TrendingUp className="w-8 h-8 text-brand-blue" />
@@ -146,9 +242,21 @@ function App() {
             <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed mb-6">
               We make the stock market beginner-friendly by stripping away confusing jargon and providing emotional support for new investors.
             </p>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
               Instead of telling you what to buy, we teach you how to think—so you can approach investing with clarity, calm, and confidence, no matter your age or background.
             </p>
+            
+            {!user && (
+              <div className="bg-brand-yellow/20 border border-brand-yellow/30 rounded-2xl p-6 max-w-2xl mx-auto">
+                <p className="text-brand-blue font-medium mb-4">
+                  🌟 Get started with a free account to unlock personalized learning and community features!
+                </p>
+                <p className="text-sm text-gray-600">
+                  <span className="font-medium text-brand-green">Free access:</span> All emotional support and anxiety help • 
+                  <span className="font-medium text-brand-blue ml-2">Premium:</span> Investment planning, community, and guided lessons
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </header>
@@ -160,13 +268,33 @@ function App() {
             <section key={categoryIndex} className="relative">
               {/* Category Header */}
               <div className="text-center mb-16">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-green/10 rounded-2xl mb-6 text-brand-green">
+                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 ${
+                  category.requiresAuth && !user
+                    ? 'bg-gray-100 text-gray-400'
+                    : 'bg-brand-green/10 text-brand-green'
+                }`}>
                   {category.icon}
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                  {category.category}
-                </h2>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                <div className="flex items-center justify-center mb-4">
+                  <h2 className={`text-3xl md:text-4xl font-bold ${
+                    category.requiresAuth && !user ? 'text-gray-500' : 'text-gray-900'
+                  }`}>
+                    {category.category}
+                  </h2>
+                  {category.requiresAuth && !user && (
+                    <div className="ml-4 bg-brand-yellow/20 text-brand-blue px-3 py-1 rounded-lg text-sm font-medium">
+                      Premium Feature
+                    </div>
+                  )}
+                  {!category.requiresAuth && (
+                    <div className="ml-4 bg-brand-green/20 text-brand-green px-3 py-1 rounded-lg text-sm font-medium">
+                      Always Free
+                    </div>
+                  )}
+                </div>
+                <p className={`text-lg max-w-2xl mx-auto leading-relaxed ${
+                  category.requiresAuth && !user ? 'text-gray-400' : 'text-gray-600'
+                }`}>
                   {category.description}
                 </p>
               </div>
@@ -174,29 +302,14 @@ function App() {
               {/* Feature Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {category.items.map((item, itemIndex) => (
-                  <div
+                  <ProtectedFeature
                     key={itemIndex}
-                    className="group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-brand-blue/30"
-                  >
-                    <div className="flex items-center mb-6">
-                      <div className="flex items-center justify-center w-12 h-12 bg-brand-yellow/20 rounded-xl text-brand-blue group-hover:bg-brand-yellow/30 transition-colors duration-300">
-                        {item.icon}
-                      </div>
-                    </div>
-                    
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                      {item.title}
-                    </h3>
-                    
-                    <p className="text-gray-600 leading-relaxed mb-6">
-                      {item.description}
-                    </p>
-
-                    <div className="flex items-center text-brand-blue font-medium group-hover:text-brand-green transition-colors duration-300">
-                      <span>Learn more</span>
-                      <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                    </div>
-                  </div>
+                    title={item.title}
+                    description={item.description}
+                    icon={item.icon}
+                    isProtected={item.requiresAuth && !user}
+                    onLoginRequired={handleLoginRequired}
+                  />
                 ))}
               </div>
             </section>
@@ -213,13 +326,32 @@ function App() {
               Join beginners of every age who are learning to invest with clarity, calm, and confidence in our supportive community.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-blue font-semibold rounded-xl hover:bg-brand-cream transition-colors duration-300">
-                Start Learning Today
-                <ChevronRight className="w-5 h-5 ml-2" />
-              </button>
-              <button className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-brand-blue transition-colors duration-300">
-                See How It Works
-              </button>
+              {user ? (
+                <button className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-blue font-semibold rounded-xl hover:bg-brand-cream transition-colors duration-300">
+                  Continue Learning
+                  <ChevronRight className="w-5 h-5 ml-2" />
+                </button>
+              ) : (
+                <>
+                  <button 
+                    onClick={handleSignUp}
+                    className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-blue font-semibold rounded-xl hover:bg-brand-cream transition-colors duration-300"
+                  >
+                    Start Learning Today
+                    <ChevronRight className="w-5 h-5 ml-2" />
+                  </button>
+                  <button 
+                    onClick={() => {
+                      document.querySelector('[data-category="emotional-support"]')?.scrollIntoView({ 
+                        behavior: 'smooth' 
+                      });
+                    }}
+                    className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-brand-blue transition-colors duration-300"
+                  >
+                    Try Anxiety Help (Free)
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </section>
@@ -239,7 +371,21 @@ function App() {
           </p>
         </div>
       </footer>
+
+      <AuthModal 
+        isOpen={authModalOpen} 
+        onClose={() => setAuthModalOpen(false)}
+        initialMode={authMode}
+      />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 
