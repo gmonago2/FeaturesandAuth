@@ -21,11 +21,13 @@ import {
 import { AuthProvider, useAuth } from './hooks/useAuth';
 import { AuthModal } from './components/AuthModal';
 import { ProtectedFeature } from './components/ProtectedFeature';
+import { JargonTranslator } from './components/JargonTranslator';
 
 function AppContent() {
   const { user, signOut, loading } = useAuth();
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
+  const [showJargonTranslator, setShowJargonTranslator] = useState(false);
 
   const handleLoginRequired = () => {
     setAuthMode('signin');
@@ -43,20 +45,9 @@ function AppContent() {
       icon: <Brain className="w-8 h-8" />,
       description: "We translate complex financial terms into plain English, so you can focus on learning instead of decoding.",
       requiresAuth: true,
-      items: [
-        {
-          title: "Plain English Word Bank",
-          description: "Every confusing term explained in simple language. No more feeling lost when reading about investing.",
-          icon: <BookOpen className="w-6 h-6" />,
-          requiresAuth: true
-        },
-        {
-          title: "Smart Term Matcher",
-          description: "Describe what you're thinking about in your own words, and we'll help you find the right investing concept with a clear explanation.",
-          icon: <MessageCircle className="w-6 h-6" />,
-          requiresAuth: true
-        }
-      ]
+      hasCustomComponent: true,
+      onClick: () => setShowJargonTranslator(true),
+      items: []
     },
     {
       category: "Emotional Support & Confidence",
@@ -273,6 +264,18 @@ function AppContent() {
 
       {/* Features Grid */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {showJargonTranslator && user ? (
+          <div className="mb-8">
+            <button
+              onClick={() => setShowJargonTranslator(false)}
+              className="text-brand-blue hover:text-brand-blue/80 font-medium mb-6 flex items-center gap-2"
+            >
+              <ChevronRight className="w-4 h-4 rotate-180" />
+              Back to all features
+            </button>
+            <JargonTranslator />
+          </div>
+        ) : (
         <div className="space-y-24">
           {features.map((category, categoryIndex) => (
             <section key={categoryIndex} className="relative">
@@ -310,21 +313,76 @@ function AppContent() {
               </div>
 
               {/* Feature Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {category.items.map((item, itemIndex) => (
-                  <ProtectedFeature
-                    key={itemIndex}
-                    title={item.title}
-                    description={item.description}
-                    icon={item.icon}
-                    isProtected={item.requiresAuth && !user}
-                    onLoginRequired={handleLoginRequired}
-                  />
-                ))}
-              </div>
+              {category.hasCustomComponent ? (
+                <div className="flex justify-center">
+                  <div
+                    className={`group relative bg-white rounded-2xl p-8 shadow-sm border border-gray-100 transition-all duration-300 max-w-2xl w-full ${
+                      category.requiresAuth && !user
+                        ? 'hover:shadow-xl hover:border-brand-blue/40 cursor-pointer hover:-translate-y-1'
+                        : 'hover:shadow-xl hover:border-brand-green/40 hover:-translate-y-1 cursor-pointer'
+                    }`}
+                    onClick={() => {
+                      if (category.requiresAuth && !user) {
+                        handleLoginRequired();
+                      } else if (category.onClick) {
+                        category.onClick();
+                      }
+                    }}
+                  >
+                    {category.requiresAuth && !user && (
+                      <div className="absolute top-4 right-4">
+                        <div className="bg-gradient-to-br from-brand-yellow/30 to-brand-yellow/20 text-brand-blue p-2 rounded-lg shadow-sm border border-brand-yellow/30">
+                          <Shield className="w-4 h-4" />
+                        </div>
+                      </div>
+                    )}
+                    <div className="text-center">
+                      <div className={`inline-flex items-center justify-center w-16 h-16 rounded-xl mb-4 ${
+                        category.requiresAuth && !user
+                          ? 'bg-gray-100 text-gray-500 group-hover:bg-gradient-to-br group-hover:from-brand-yellow/30 group-hover:to-brand-blue/20 group-hover:text-brand-blue shadow-sm'
+                          : 'bg-gradient-to-br from-brand-yellow/20 to-brand-green/20 text-brand-blue group-hover:from-brand-yellow/30 group-hover:to-brand-green/30 shadow-sm'
+                      }`}>
+                        <Brain className="w-8 h-8" />
+                      </div>
+                      <h3 className={`text-2xl font-bold mb-3 ${
+                        category.requiresAuth && !user ? 'text-gray-500 group-hover:text-gray-900' : 'text-gray-900'
+                      }`}>
+                        Jargon Translator
+                      </h3>
+                      <p className={`leading-relaxed mb-6 ${
+                        category.requiresAuth && !user ? 'text-gray-400 group-hover:text-gray-600' : 'text-gray-600'
+                      }`}>
+                        Access our word bank with common investing terms explained in plain English, or use our smart chatbot to describe what you're thinking and find the right concept.
+                      </p>
+                      <div className={`flex items-center justify-center font-medium transition-colors duration-300 ${
+                        category.requiresAuth && !user
+                          ? 'text-gray-400 group-hover:text-brand-blue group-hover:font-semibold'
+                          : 'text-brand-blue group-hover:text-brand-green group-hover:font-semibold'
+                      }`}>
+                        <span>{category.requiresAuth && !user ? 'Sign in to access' : 'Open Translator'}</span>
+                        <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {category.items.map((item, itemIndex) => (
+                    <ProtectedFeature
+                      key={itemIndex}
+                      title={item.title}
+                      description={item.description}
+                      icon={item.icon}
+                      isProtected={item.requiresAuth && !user}
+                      onLoginRequired={handleLoginRequired}
+                    />
+                  ))}
+                </div>
+              )}
             </section>
           ))}
         </div>
+        )}
 
         {/* Call to Action */}
         <section className="mt-24 text-center">
