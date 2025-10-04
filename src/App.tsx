@@ -182,20 +182,11 @@ function AppContent() {
           {/* Navigation */}
           <div className="flex justify-between items-center mb-8">
             <div className="flex items-center">
-              <img 
-                src="https://i.imgur.com/YourLogoUrl.png" 
-                alt="First Shares Logo" 
-                className="h-10 w-auto mr-3"
-                onError={(e) => {
-                  // Fallback to icon if image fails to load
-                  e.currentTarget.style.display = 'none';
-                  e.currentTarget.nextElementSibling?.classList.remove('hidden');
-                }}
+              <img
+                src="/src/assets/Gemini_Generated_Image_o6l9p9o6l9p9o6l9-removebg-preview.png"
+                alt="First Shares Logo"
+                className="h-14 w-auto"
               />
-              <div className="hidden inline-flex items-center justify-center w-10 h-10 bg-gradient-to-br from-brand-yellow to-brand-blue rounded-xl mr-3">
-                <TrendingUp className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-xl font-bold text-gray-900">First Shares</span>
             </div>
             
             <div className="flex items-center space-x-4">
@@ -236,9 +227,6 @@ function AppContent() {
 
           {/* Hero Content */}
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-brand-yellow via-brand-blue to-brand-green rounded-3xl mb-6 shadow-lg">
-              <TrendingUp className="w-10 h-10 text-white" />
-            </div>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Stocks, Explained in Plain English
             </h1>
@@ -267,77 +255,66 @@ function AppContent() {
       {/* Navigation Tabs */}
       <div className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex overflow-x-auto">
-            <button
-              onClick={() => setActiveTab('all')}
-              className={`flex items-center gap-2 px-6 py-4 font-semibold whitespace-nowrap transition-all duration-300 border-b-4 ${
-                activeTab === 'all'
-                  ? 'border-brand-blue text-brand-blue'
-                  : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-              }`}
-            >
-              <ChevronRight className="w-4 h-4" />
-              <span>All Features</span>
-            </button>
+          <div className="flex justify-center items-center">
             <button
               onClick={() => setActiveTab('jargon')}
-              className={`flex items-center gap-2 px-6 py-4 font-semibold whitespace-nowrap transition-all duration-300 border-b-4 ${
+              className={`flex items-center gap-2 px-4 py-4 font-semibold whitespace-nowrap transition-all duration-300 border-b-4 ${
                 activeTab === 'jargon'
                   ? 'border-brand-blue text-brand-blue'
                   : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
               }`}
             >
               <Brain className="w-4 h-4" />
-              <span>Jargon Translator</span>
-              {!user && <span className="ml-1 text-xs bg-brand-yellow/20 text-brand-blue px-2 py-0.5 rounded-full">Premium</span>}
+              <span className="hidden sm:inline">Jargon</span>
+              {!user && <span className="ml-1 text-xs bg-brand-yellow/20 text-brand-blue px-2 py-0.5 rounded-full hidden lg:inline">Premium</span>}
             </button>
             <button
               onClick={() => setActiveTab('emotional')}
-              className={`flex items-center gap-2 px-6 py-4 font-semibold whitespace-nowrap transition-all duration-300 border-b-4 ${
+              className={`flex items-center gap-2 px-4 py-4 font-semibold whitespace-nowrap transition-all duration-300 border-b-4 ${
                 activeTab === 'emotional'
                   ? 'border-brand-blue text-brand-blue'
                   : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
               }`}
             >
               <Heart className="w-4 h-4" />
-              <span>Emotional Support</span>
-              <span className="ml-1 text-xs bg-brand-green/20 text-brand-green px-2 py-0.5 rounded-full">Free</span>
+              <span className="hidden sm:inline">Emotional</span>
+              <span className="ml-1 text-xs bg-brand-green/20 text-brand-green px-2 py-0.5 rounded-full hidden lg:inline">Free</span>
             </button>
             <button
               onClick={() => setActiveTab('missions')}
-              className={`flex items-center gap-2 px-6 py-4 font-semibold whitespace-nowrap transition-all duration-300 border-b-4 ${
+              className={`flex items-center gap-2 px-4 py-4 font-semibold whitespace-nowrap transition-all duration-300 border-b-4 ${
                 activeTab === 'missions'
                   ? 'border-brand-blue text-brand-blue'
                   : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
               }`}
             >
               <Target className="w-4 h-4" />
-              <span>Missions</span>
-              {!user && <span className="ml-1 text-xs bg-brand-yellow/20 text-brand-blue px-2 py-0.5 rounded-full">Premium</span>}
+              <span className="hidden sm:inline">Missions</span>
+              {!user && <span className="ml-1 text-xs bg-brand-yellow/20 text-brand-blue px-2 py-0.5 rounded-full hidden lg:inline">Premium</span>}
             </button>
             <button
               onClick={() => setActiveTab('plan')}
-              className={`flex items-center gap-2 px-6 py-4 font-semibold whitespace-nowrap transition-all duration-300 border-b-4 ${
+              className={`flex items-center gap-2 px-4 py-4 font-semibold whitespace-nowrap transition-all duration-300 border-b-4 ${
                 activeTab === 'plan'
                   ? 'border-brand-blue text-brand-blue'
                   : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
               }`}
             >
               <BarChart3 className="w-4 h-4" />
-              <span>Personalized Plan</span>
-              {!user && <span className="ml-1 text-xs bg-brand-yellow/20 text-brand-blue px-2 py-0.5 rounded-full">Premium</span>}
+              <span className="hidden sm:inline">Plan</span>
+              {!user && <span className="ml-1 text-xs bg-brand-yellow/20 text-brand-blue px-2 py-0.5 rounded-full hidden lg:inline">Premium</span>}
             </button>
             <button
               onClick={() => setActiveTab('social')}
-              className={`flex items-center gap-2 px-6 py-4 font-semibold whitespace-nowrap transition-all duration-300 border-b-4 ${
+              className={`flex items-center gap-2 px-4 py-4 font-semibold whitespace-nowrap transition-all duration-300 border-b-4 ${
                 activeTab === 'social'
                   ? 'border-brand-blue text-brand-blue'
                   : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
               }`}
             >
               <Users className="w-4 h-4" />
-              <span>Social Learning</span>
-              {!user && <span className="ml-1 text-xs bg-brand-yellow/20 text-brand-blue px-2 py-0.5 rounded-full">Premium</span>}
+              <span className="hidden sm:inline">Social</span>
+              {!user && <span className="ml-1 text-xs bg-brand-yellow/20 text-brand-blue px-2 py-0.5 rounded-full hidden lg:inline">Premium</span>}
             </button>
           </div>
         </div>
@@ -366,8 +343,39 @@ function AppContent() {
               </button>
             </div>
           )
-        ) : activeTab === 'all' ? (
-        <div className="space-y-24">
+        ) : activeTab === 'emotional' || activeTab === 'missions' || activeTab === 'plan' || activeTab === 'social' ? (
+          <div className="text-center py-16">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-brand-green/20 to-brand-blue/20 rounded-3xl mb-6">
+              {activeTab === 'emotional' && <Heart className="w-10 h-10 text-brand-green" />}
+              {activeTab === 'missions' && <Target className="w-10 h-10 text-brand-blue" />}
+              {activeTab === 'plan' && <BarChart3 className="w-10 h-10 text-brand-blue" />}
+              {activeTab === 'social' && <Users className="w-10 h-10 text-brand-blue" />}
+            </div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              {activeTab === 'emotional' && 'Emotional Support & Confidence'}
+              {activeTab === 'missions' && 'Learn by Doing'}
+              {activeTab === 'plan' && 'Your Personal Investment Plan'}
+              {activeTab === 'social' && 'Safe Community Learning'}
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+              {activeTab === 'emotional' && 'We address your worries head-on and help you build the confidence to invest at your own pace.'}
+              {activeTab === 'missions' && 'Build confidence through hands-on missions that make learning feel like progress, not homework.'}
+              {activeTab === 'plan' && 'We help you create a plan that fits your life, your values, and your timeline—no cookie-cutter advice.'}
+              {activeTab === 'social' && 'Connect with other beginners in a supportive, public environment where everyone\'s learning together.'}
+            </p>
+            {((activeTab === 'missions' || activeTab === 'plan' || activeTab === 'social') && !user) && (
+              <button
+                onClick={handleLoginRequired}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-blue text-white font-semibold rounded-xl hover:bg-brand-blue/90 transition-all duration-300 shadow-lg"
+              >
+                Sign In to Access
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            )}
+            <p className="text-gray-500 mt-8">Content coming soon...</p>
+          </div>
+        ) : (
+        <div className="space-y-16">
           {features.map((category, categoryIndex) => (
             <section key={categoryIndex} className="relative">
               {/* Category Header */}
@@ -403,107 +411,70 @@ function AppContent() {
                 </p>
               </div>
 
-              {/* Feature Cards */}
-              {category.hasCustomComponent ? (
-                <div className="flex justify-center">
-                  <div
-                    className={`group relative bg-white rounded-2xl p-8 shadow-sm border border-gray-100 transition-all duration-300 max-w-2xl w-full ${
+              {/* Single Feature Card */}
+              <div className="flex justify-center">
+                <div
+                  className={`group relative bg-white rounded-2xl p-8 shadow-sm border border-gray-100 transition-all duration-300 max-w-2xl w-full cursor-pointer ${
+                    category.requiresAuth && !user
+                      ? 'hover:shadow-xl hover:border-brand-blue/40 hover:-translate-y-1'
+                      : 'hover:shadow-xl hover:border-brand-green/40 hover:-translate-y-1'
+                  }`}
+                  onClick={() => {
+                    if (category.requiresAuth && !user) {
+                      handleLoginRequired();
+                    } else if (category.onClick) {
+                      category.onClick();
+                    } else {
+                      const tabMap: { [key: string]: ActiveTab } = {
+                        'Emotional Support & Confidence': 'emotional',
+                        'Learn by Doing': 'missions',
+                        'Your Personal Investment Plan': 'plan',
+                        'Safe Community Learning': 'social'
+                      };
+                      const tab = tabMap[category.category];
+                      if (tab) setActiveTab(tab);
+                    }
+                  }}
+                >
+                  {category.requiresAuth && !user && (
+                    <div className="absolute top-4 right-4">
+                      <div className="bg-gradient-to-br from-brand-yellow/30 to-brand-yellow/20 text-brand-blue p-2 rounded-lg shadow-sm border border-brand-yellow/30">
+                        <Shield className="w-4 h-4" />
+                      </div>
+                    </div>
+                  )}
+                  <div className="text-center">
+                    <div className={`inline-flex items-center justify-center w-16 h-16 rounded-xl mb-4 ${
                       category.requiresAuth && !user
-                        ? 'hover:shadow-xl hover:border-brand-blue/40 cursor-pointer hover:-translate-y-1'
-                        : 'hover:shadow-xl hover:border-brand-green/40 hover:-translate-y-1 cursor-pointer'
-                    }`}
-                    onClick={() => {
-                      if (category.requiresAuth && !user) {
-                        handleLoginRequired();
-                      } else if (category.onClick) {
-                        category.onClick();
-                      }
-                    }}
-                  >
-                    {category.requiresAuth && !user && (
-                      <div className="absolute top-4 right-4">
-                        <div className="bg-gradient-to-br from-brand-yellow/30 to-brand-yellow/20 text-brand-blue p-2 rounded-lg shadow-sm border border-brand-yellow/30">
-                          <Shield className="w-4 h-4" />
-                        </div>
-                      </div>
-                    )}
-                    <div className="text-center">
-                      <div className={`inline-flex items-center justify-center w-16 h-16 rounded-xl mb-4 ${
-                        category.requiresAuth && !user
-                          ? 'bg-gray-100 text-gray-500 group-hover:bg-gradient-to-br group-hover:from-brand-yellow/30 group-hover:to-brand-blue/20 group-hover:text-brand-blue shadow-sm'
-                          : 'bg-gradient-to-br from-brand-yellow/20 to-brand-green/20 text-brand-blue group-hover:from-brand-yellow/30 group-hover:to-brand-green/30 shadow-sm'
-                      }`}>
-                        <Brain className="w-8 h-8" />
-                      </div>
-                      <h3 className={`text-2xl font-bold mb-3 ${
-                        category.requiresAuth && !user ? 'text-gray-500 group-hover:text-gray-900' : 'text-gray-900'
-                      }`}>
-                        Jargon Translator
-                      </h3>
-                      <p className={`leading-relaxed mb-6 ${
-                        category.requiresAuth && !user ? 'text-gray-400 group-hover:text-gray-600' : 'text-gray-600'
-                      }`}>
-                        Access our word bank with common investing terms explained in plain English, or use our smart chatbot to describe what you're thinking and find the right concept.
-                      </p>
-                      <div className={`flex items-center justify-center font-medium transition-colors duration-300 ${
-                        category.requiresAuth && !user
-                          ? 'text-gray-400 group-hover:text-brand-blue group-hover:font-semibold'
-                          : 'text-brand-blue group-hover:text-brand-green group-hover:font-semibold'
-                      }`}>
-                        <span>{category.requiresAuth && !user ? 'Sign in to access' : 'Open Translator'}</span>
-                        <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                      </div>
+                        ? 'bg-gray-100 text-gray-500 group-hover:bg-gradient-to-br group-hover:from-brand-yellow/30 group-hover:to-brand-blue/20 group-hover:text-brand-blue shadow-sm'
+                        : 'bg-gradient-to-br from-brand-yellow/20 to-brand-green/20 text-brand-blue group-hover:from-brand-yellow/30 group-hover:to-brand-green/30 shadow-sm'
+                    }`}>
+                      {category.icon}
+                    </div>
+                    <h3 className={`text-2xl font-bold mb-3 ${
+                      category.requiresAuth && !user ? 'text-gray-500 group-hover:text-gray-900' : 'text-gray-900'
+                    }`}>
+                      {category.category}
+                    </h3>
+                    <p className={`leading-relaxed mb-6 ${
+                      category.requiresAuth && !user ? 'text-gray-400 group-hover:text-gray-600' : 'text-gray-600'
+                    }`}>
+                      {category.description}
+                    </p>
+                    <div className={`flex items-center justify-center font-medium transition-colors duration-300 ${
+                      category.requiresAuth && !user
+                        ? 'text-gray-400 group-hover:text-brand-blue group-hover:font-semibold'
+                        : 'text-brand-blue group-hover:text-brand-green group-hover:font-semibold'
+                    }`}>
+                      <span>{category.requiresAuth && !user ? 'Sign in to access' : 'Explore'}</span>
+                      <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
                     </div>
                   </div>
                 </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {category.items.map((item, itemIndex) => (
-                    <ProtectedFeature
-                      key={itemIndex}
-                      title={item.title}
-                      description={item.description}
-                      icon={item.icon}
-                      isProtected={item.requiresAuth && !user}
-                      onLoginRequired={handleLoginRequired}
-                    />
-                  ))}
-                </div>
-              )}
+              </div>
             </section>
           ))}
         </div>
-        ) : (
-          <div className="text-center py-16">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-brand-green/20 to-brand-blue/20 rounded-3xl mb-6">
-              {activeTab === 'emotional' && <Heart className="w-10 h-10 text-brand-green" />}
-              {activeTab === 'missions' && <Target className="w-10 h-10 text-brand-blue" />}
-              {activeTab === 'plan' && <BarChart3 className="w-10 h-10 text-brand-blue" />}
-              {activeTab === 'social' && <Users className="w-10 h-10 text-brand-blue" />}
-            </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              {activeTab === 'emotional' && 'Emotional Support & Confidence'}
-              {activeTab === 'missions' && 'Learn by Doing'}
-              {activeTab === 'plan' && 'Your Personal Investment Plan'}
-              {activeTab === 'social' && 'Safe Community Learning'}
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-              {activeTab === 'emotional' && 'We address your worries head-on and help you build the confidence to invest at your own pace.'}
-              {activeTab === 'missions' && 'Build confidence through hands-on missions that make learning feel like progress, not homework.'}
-              {activeTab === 'plan' && 'We help you create a plan that fits your life, your values, and your timeline—no cookie-cutter advice.'}
-              {activeTab === 'social' && 'Connect with other beginners in a supportive, public environment where everyone\'s learning together.'}
-            </p>
-            {((activeTab === 'missions' || activeTab === 'plan' || activeTab === 'social') && !user) && (
-              <button
-                onClick={handleLoginRequired}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-blue text-white font-semibold rounded-xl hover:bg-brand-blue/90 transition-all duration-300 shadow-lg"
-              >
-                Sign In to Access
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            )}
-            <p className="text-gray-500 mt-8">Content coming soon...</p>
-          </div>
         )}
 
         {/* Call to Action */}
