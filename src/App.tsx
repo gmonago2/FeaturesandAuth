@@ -23,11 +23,13 @@ import { AuthModal } from './components/AuthModal';
 import { ProtectedFeature } from './components/ProtectedFeature';
 import { JargonTranslator } from './components/JargonTranslator';
 
+type ActiveTab = 'all' | 'jargon' | 'emotional' | 'missions' | 'plan' | 'social';
+
 function AppContent() {
   const { user, signOut, loading } = useAuth();
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
-  const [showJargonTranslator, setShowJargonTranslator] = useState(false);
+  const [activeTab, setActiveTab] = useState<ActiveTab>('all');
 
   const handleLoginRequired = () => {
     setAuthMode('signin');
@@ -46,7 +48,7 @@ function AppContent() {
       description: "We translate complex financial terms into plain English, so you can focus on learning instead of decoding.",
       requiresAuth: true,
       hasCustomComponent: true,
-      onClick: () => setShowJargonTranslator(true),
+      onClick: () => setActiveTab('jargon'),
       items: []
     },
     {
@@ -253,7 +255,7 @@ function AppContent() {
                   🌟 Get started with a free account to unlock personalized learning and community features!
                 </p>
                 <p className="text-sm text-gray-600">
-                  <span className="font-semibold text-brand-green bg-brand-green/10 px-2 py-1 rounded">Free access:</span> All emotional support and anxiety help • 
+                  <span className="font-semibold text-brand-green bg-brand-green/10 px-2 py-1 rounded">Free access:</span> All emotional support and anxiety help •
                   <span className="font-semibold text-brand-blue bg-brand-blue/10 px-2 py-1 rounded ml-2">Premium:</span> Investment planning, community, and guided lessons
                 </p>
               </div>
@@ -262,20 +264,109 @@ function AppContent() {
         </div>
       </header>
 
-      {/* Features Grid */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {showJargonTranslator && user ? (
-          <div className="mb-8">
+      {/* Navigation Tabs */}
+      <div className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex overflow-x-auto">
             <button
-              onClick={() => setShowJargonTranslator(false)}
-              className="text-brand-blue hover:text-brand-blue/80 font-medium mb-6 flex items-center gap-2"
+              onClick={() => setActiveTab('all')}
+              className={`flex items-center gap-2 px-6 py-4 font-semibold whitespace-nowrap transition-all duration-300 border-b-4 ${
+                activeTab === 'all'
+                  ? 'border-brand-blue text-brand-blue'
+                  : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+              }`}
             >
-              <ChevronRight className="w-4 h-4 rotate-180" />
-              Back to all features
+              <ChevronRight className="w-4 h-4" />
+              <span>All Features</span>
             </button>
-            <JargonTranslator />
+            <button
+              onClick={() => setActiveTab('jargon')}
+              className={`flex items-center gap-2 px-6 py-4 font-semibold whitespace-nowrap transition-all duration-300 border-b-4 ${
+                activeTab === 'jargon'
+                  ? 'border-brand-blue text-brand-blue'
+                  : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+              }`}
+            >
+              <Brain className="w-4 h-4" />
+              <span>Jargon Translator</span>
+              {!user && <span className="ml-1 text-xs bg-brand-yellow/20 text-brand-blue px-2 py-0.5 rounded-full">Premium</span>}
+            </button>
+            <button
+              onClick={() => setActiveTab('emotional')}
+              className={`flex items-center gap-2 px-6 py-4 font-semibold whitespace-nowrap transition-all duration-300 border-b-4 ${
+                activeTab === 'emotional'
+                  ? 'border-brand-blue text-brand-blue'
+                  : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+              }`}
+            >
+              <Heart className="w-4 h-4" />
+              <span>Emotional Support</span>
+              <span className="ml-1 text-xs bg-brand-green/20 text-brand-green px-2 py-0.5 rounded-full">Free</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('missions')}
+              className={`flex items-center gap-2 px-6 py-4 font-semibold whitespace-nowrap transition-all duration-300 border-b-4 ${
+                activeTab === 'missions'
+                  ? 'border-brand-blue text-brand-blue'
+                  : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+              }`}
+            >
+              <Target className="w-4 h-4" />
+              <span>Missions</span>
+              {!user && <span className="ml-1 text-xs bg-brand-yellow/20 text-brand-blue px-2 py-0.5 rounded-full">Premium</span>}
+            </button>
+            <button
+              onClick={() => setActiveTab('plan')}
+              className={`flex items-center gap-2 px-6 py-4 font-semibold whitespace-nowrap transition-all duration-300 border-b-4 ${
+                activeTab === 'plan'
+                  ? 'border-brand-blue text-brand-blue'
+                  : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+              }`}
+            >
+              <BarChart3 className="w-4 h-4" />
+              <span>Personalized Plan</span>
+              {!user && <span className="ml-1 text-xs bg-brand-yellow/20 text-brand-blue px-2 py-0.5 rounded-full">Premium</span>}
+            </button>
+            <button
+              onClick={() => setActiveTab('social')}
+              className={`flex items-center gap-2 px-6 py-4 font-semibold whitespace-nowrap transition-all duration-300 border-b-4 ${
+                activeTab === 'social'
+                  ? 'border-brand-blue text-brand-blue'
+                  : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+              }`}
+            >
+              <Users className="w-4 h-4" />
+              <span>Social Learning</span>
+              {!user && <span className="ml-1 text-xs bg-brand-yellow/20 text-brand-blue px-2 py-0.5 rounded-full">Premium</span>}
+            </button>
           </div>
-        ) : (
+        </div>
+      </div>
+
+      {/* Features Content */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {activeTab === 'jargon' ? (
+          user ? (
+            <JargonTranslator />
+          ) : (
+            <div className="text-center py-16">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-brand-yellow/30 to-brand-blue/20 rounded-3xl mb-6">
+                <Brain className="w-10 h-10 text-brand-blue" />
+              </div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Jargon Translator</h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+                Access our word bank with common investing terms explained in plain English, or use our smart chatbot to find the right concept.
+              </p>
+              <button
+                onClick={handleLoginRequired}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-blue text-white font-semibold rounded-xl hover:bg-brand-blue/90 transition-all duration-300 shadow-lg"
+              >
+                Sign In to Access
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          )
+        ) : activeTab === 'all' ? (
         <div className="space-y-24">
           {features.map((category, categoryIndex) => (
             <section key={categoryIndex} className="relative">
@@ -382,6 +473,37 @@ function AppContent() {
             </section>
           ))}
         </div>
+        ) : (
+          <div className="text-center py-16">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-brand-green/20 to-brand-blue/20 rounded-3xl mb-6">
+              {activeTab === 'emotional' && <Heart className="w-10 h-10 text-brand-green" />}
+              {activeTab === 'missions' && <Target className="w-10 h-10 text-brand-blue" />}
+              {activeTab === 'plan' && <BarChart3 className="w-10 h-10 text-brand-blue" />}
+              {activeTab === 'social' && <Users className="w-10 h-10 text-brand-blue" />}
+            </div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              {activeTab === 'emotional' && 'Emotional Support & Confidence'}
+              {activeTab === 'missions' && 'Learn by Doing'}
+              {activeTab === 'plan' && 'Your Personal Investment Plan'}
+              {activeTab === 'social' && 'Safe Community Learning'}
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+              {activeTab === 'emotional' && 'We address your worries head-on and help you build the confidence to invest at your own pace.'}
+              {activeTab === 'missions' && 'Build confidence through hands-on missions that make learning feel like progress, not homework.'}
+              {activeTab === 'plan' && 'We help you create a plan that fits your life, your values, and your timeline—no cookie-cutter advice.'}
+              {activeTab === 'social' && 'Connect with other beginners in a supportive, public environment where everyone\'s learning together.'}
+            </p>
+            {((activeTab === 'missions' || activeTab === 'plan' || activeTab === 'social') && !user) && (
+              <button
+                onClick={handleLoginRequired}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-blue text-white font-semibold rounded-xl hover:bg-brand-blue/90 transition-all duration-300 shadow-lg"
+              >
+                Sign In to Access
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            )}
+            <p className="text-gray-500 mt-8">Content coming soon...</p>
+          </div>
         )}
 
         {/* Call to Action */}
