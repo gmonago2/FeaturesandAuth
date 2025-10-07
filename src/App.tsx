@@ -24,6 +24,7 @@ import { ProtectedFeature } from './components/ProtectedFeature';
 import { JargonTranslator } from './components/JargonTranslator';
 import { Missions } from './components/Missions';
 import { InvestmentPlan } from './components/InvestmentPlan';
+import { SocialFeed } from './components/SocialFeed';
 
 type ActiveTab = 'all' | 'jargon' | 'emotional' | 'missions' | 'plan' | 'social';
 
@@ -387,21 +388,18 @@ function AppContent() {
               </button>
             </div>
           )
-        ) : activeTab === 'emotional' || activeTab === 'social' ? (
-          <div className="text-center py-16">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-brand-green/20 to-brand-blue/20 rounded-3xl mb-6">
-              {activeTab === 'emotional' && <Heart className="w-10 h-10 text-brand-green" />}
-              {activeTab === 'social' && <Users className="w-10 h-10 text-brand-blue" />}
-            </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              {activeTab === 'emotional' && 'Emotional Support & Confidence'}
-              {activeTab === 'social' && 'Safe Community Learning'}
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-              {activeTab === 'emotional' && 'We address your worries head-on and help you build the confidence to invest at your own pace.'}
-              {activeTab === 'social' && 'Connect with other beginners in a supportive, public environment where everyone\'s learning together.'}
-            </p>
-            {activeTab === 'social' && !user && (
+        ) : activeTab === 'social' ? (
+          user ? (
+            <SocialFeed />
+          ) : (
+            <div className="text-center py-16">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-brand-blue/20 to-brand-green/20 rounded-3xl mb-6">
+                <Users className="w-10 h-10 text-brand-blue" />
+              </div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Safe Community Learning</h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+                Connect with other beginners in a supportive, public environment where everyone's learning together.
+              </p>
               <button
                 onClick={handleLoginRequired}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-brand-blue text-white font-semibold rounded-xl hover:bg-brand-blue/90 transition-all duration-300 shadow-lg"
@@ -409,7 +407,17 @@ function AppContent() {
                 Sign In to Access
                 <ChevronRight className="w-5 h-5" />
               </button>
-            )}
+            </div>
+          )
+        ) : activeTab === 'emotional' ? (
+          <div className="text-center py-16">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-brand-green/20 to-brand-blue/20 rounded-3xl mb-6">
+              <Heart className="w-10 h-10 text-brand-green" />
+            </div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Emotional Support & Confidence</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+              We address your worries head-on and help you build the confidence to invest at your own pace.
+            </p>
             <p className="text-gray-500 mt-8">Content coming soon...</p>
           </div>
         ) : (
