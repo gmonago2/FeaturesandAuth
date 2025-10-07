@@ -25,6 +25,7 @@ import { JargonTranslator } from './components/JargonTranslator';
 import { Missions } from './components/Missions';
 import { InvestmentPlan } from './components/InvestmentPlan';
 import { SocialFeed } from './components/SocialFeed';
+import { EmotionalSupport } from './components/EmotionalSupport';
 
 type ActiveTab = 'all' | 'jargon' | 'emotional' | 'missions' | 'plan' | 'social';
 
@@ -410,16 +411,7 @@ function AppContent() {
             </div>
           )
         ) : activeTab === 'emotional' ? (
-          <div className="text-center py-16">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-brand-green/20 to-brand-blue/20 rounded-3xl mb-6">
-              <Heart className="w-10 h-10 text-brand-green" />
-            </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Emotional Support & Confidence</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-              We address your worries head-on and help you build the confidence to invest at your own pace.
-            </p>
-            <p className="text-gray-500 mt-8">Content coming soon...</p>
-          </div>
+          <EmotionalSupport />
         ) : (
         <div className="space-y-16">
           {features.map((category, categoryIndex) => (
